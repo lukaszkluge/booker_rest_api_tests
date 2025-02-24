@@ -1,0 +1,14 @@
+stages:
+  - test
+
+test_api:
+  image: python:3.11-slim
+  stage: test
+  before_script:
+    - pip install --no-cache-dir -r requirements.txt
+  script:
+    - pytest --maxfail=5 --disable-warnings --html=report.html
+  artifacts:
+    paths:
+      - report.html
+    when: always
