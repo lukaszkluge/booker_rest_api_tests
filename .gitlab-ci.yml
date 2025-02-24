@@ -1,0 +1,16 @@
+stages:
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+test_api:
+  stage: test
+  image: python:3.11-slim
+  script:
+    - pip install --no-cache-dir -r requirements.txt
+    - pytest --maxfail=5 --disable-warnings --html=report.html
+  artifacts:
+    paths:
+      - report.html
+    expire_in: 1 week
